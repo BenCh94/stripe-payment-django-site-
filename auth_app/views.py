@@ -104,7 +104,7 @@ def subscription_webhook(request):
     event_json = json.loads(request.body)
 
     try:
-        #comment out for testing use when live
+        #comment out for testing, use when live
         #event = stripe.Event.retrieve(event_json['object']['id'])
         cust = event_json['object']['customer']
         paid = event_json['object']['paid']

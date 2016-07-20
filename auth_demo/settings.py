@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2a0vqq1yij+v&n2yt*hkyo(v8ptbc-ug9m6cx!-9pv$wp#o4gv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -34,10 +34,16 @@ AUTHENTICATION_BACKENDS = (
     'auth_app.backends.EmailAuth',
 )
 
+#paypal settings
+SITE_URL = 'htttp://127.0.0.1:8000'
+PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
+PAYPAL_RECIEVER_EMAIL = 'bchadwick94-facilitator@gmail.com'
+
+#stripe settings
 STRIPE_PUBLISHABLE = os.getenv('STRIPE_PUBLISHABLE', 'pk_test_RdG27cQp2xSiRDfPBIzzGNFO')
 STRIPE_SECRET = os.getenv('STRIPE_SECRET', 'sk_test_ZDJBCTucF10YEoLS3AjOYw1g')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "staticfiles"),)
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,6 +56,9 @@ INSTALLED_APPS = [
     'auth_app',
     'hello',
     'django_forms_bootstrap',
+    'paypal_store',
+    'products',
+    'paypal.standard.ipn'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -133,3 +142,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
